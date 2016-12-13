@@ -8,6 +8,10 @@
     "start": "webpack-dev-server --hot --inline",
     "test" : "jest"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adamciolkowski/profile-generator"
+  },
   "author": "",
   "license": "ISC",
   "devDependencies": {
