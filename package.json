@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "start": "webpack-dev-server --hot --inline"
+    "start": "webpack-dev-server --hot --inline",
+    "test" : "jest"
   },
   "author": "",
   "license": "ISC",
@@ -15,6 +16,7 @@
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-react": "^6.16.0",
     "css-loader": "^0.26.0",
+    "jest": "^17.0.3",
     "node-sass": "^3.13.0",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
