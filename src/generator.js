@@ -9,10 +9,6 @@ import _ from 'lodash';
 
 export default function generate(mixture, nrOfPeople) {
     let attributes = Object.keys(mixture);
-    if (nrOfPeople == 1) {
-        return attributes
-            .map(a => mixture[a].map(v => a + v).join(''));
-    }
     let allVariants = attributes.map(a => mixture[a].map(v => a + v));
     let variants = allVariants[0];
     let pairs = allDistinctPairs(variants);
