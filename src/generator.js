@@ -1,4 +1,7 @@
 import allPossiblePairs from './allPossiblePairs';
+import {allPossibleNElementArrays} from './allPossiblePairs';
+import groupByCount from './groupByCount';
+import containsAll from './containsAll';
 import isEqual from 'lodash/isEqual';
 import sortBy from 'lodash/sortBy';
 import uniqWith from 'lodash/uniqWith';
@@ -13,7 +16,7 @@ export default function generate(mixture, nrOfPeople) {
     let allVariants = attributes.map(a => mixture[a].map(v => a + v));
     let variants = allVariants[0];
     let pairs = allDistinctPairs(variants);
-    return _.chain(allPossiblePairs(pairs))
+    return _.chain(allPossibleNElementArrays(pairs, nrOfPeople))
         .uniqWith(areEquivalent)
         .filter(e => !containsIdenticalValues(e))
         .map(a => a.map(e => e.join('')))
@@ -33,13 +36,7 @@ function allDistinctPairs(elements) {
 }
 
 function areEquivalent(a, b) {
-    return a.length === b.length && containsAll(a, b) && containsAll(b, a);
-}
-
-function containsAll(array, other) {
-    return _.every(array, e => contains(other, e));
-}
-
-function contains(array, element) {
-    return _.some(array, e => _.isEqual(element, e));
+    let a1 = groupByCount(a);
+    let a2 = groupByCount(b);
+    return a1.length == a2.length && containsAll(a1, a2) && containsAll(a2, a1);
 }

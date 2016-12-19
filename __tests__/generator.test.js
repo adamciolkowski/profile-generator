@@ -13,3 +13,18 @@ test('two people have variants that can create mixture by taking one attribute f
         ['A1A2', 'A2A2']
     ]);
 });
+
+test('three people have variants that can create mixture by taking one attribute from each', () => {
+    expect(generate({A: [1, 2]}, 3)).to.have.deep.members([
+        ['A1A1', 'A1A1', 'A1A2'],
+        ['A1A1', 'A1A1', 'A2A2'],
+
+        ['A1A1', 'A1A2', 'A1A2'],
+        ['A1A1', 'A1A2', 'A2A2'],
+        ['A1A1', 'A2A2', 'A2A2'],
+
+        ['A1A2', 'A1A2', 'A1A2'],
+        ['A1A2', 'A1A2', 'A2A2'],
+        ['A1A2', 'A2A2', 'A2A2']
+    ]);
+});
