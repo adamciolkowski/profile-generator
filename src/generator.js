@@ -5,18 +5,17 @@ import containsAll from './containsAll';
 import isEqual from 'lodash/isEqual';
 import sortBy from 'lodash/sortBy';
 import uniqWith from 'lodash/uniqWith';
+import values from 'lodash/values';
+import generateVariants from './variantsGenerator';
 import _ from 'lodash';
 
 export default function generate(mixture, nrOfPeople) {
-    let attributes = Object.keys(mixture);
-    let allVariants = attributes.map(a => mixture[a].map(v => a + v));
-    let variants = allVariants[0];
-    let pairs = allDistinctPairs(variants);
-    return _.chain(allPossibleNElementArrays(pairs, nrOfPeople))
-        .uniqWith(areEquivalent)
-        .filter(e => !containsIdenticalValues(e))
-        .map(a => a.map(e => e.join('')))
-        .value();
+    let variants = generateVariants(mixture);
+    let val = values(variants);
+    let allProfiles = allPossibleNElementArrays(val, nrOfPeople);
+    let flat = _.flattenDeep(allProfiles);
+    console.log('v', val, '->', flat);
+    return flat;
 }
 
 function containsIdenticalValues(array) {
