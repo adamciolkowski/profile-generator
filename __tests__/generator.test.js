@@ -13,6 +13,5 @@ test('each person has always two variants of attribute', () => {
 test('test of multiple features', () => {
     expect(generate({A: [1, 2], B: [1, 2]}, 6)).to.deep.equal(
             ['A1A1B1B1', 'A1A1B1B2', 'A1A1B2B2',
-            'A1A2B1B1', 'A1A2B1B2', 'A1A2B2B2',
-            'A2A2B1B1', 'A2A2B1B2', 'A2A2B2B2']);
+            'A1A2B1B1', 'A1A2B1B2', 'A1A2B2B2']);
 });
