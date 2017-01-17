@@ -41,7 +41,7 @@ export default class App extends Component {
                     {map(this.state.allProfiles, (profileGroup, i) => {
                         return (
                             <tr key={i}>
-                                {profileGroup.map((profile, j) => <td key={j}>{profile}</td>)}
+                                <td key={i}>{profileGroup}</td>
                             </tr>
                         );
                     })}

@@ -16,9 +16,8 @@ export default function generate(mixture, nrOfPeople) {
     let val = values(variants);
     let allProfiles = getAllPermutations(val, nrOfPeople);
 
-    let flat = allProfiles;
-    console.log('v', val, '->', flat);
-    return flat;
+    console.log('v', val, '->', allProfiles);
+    return allProfiles;
 }
 
 export function getAllPermutations(val, nrOfPeople) {
@@ -41,7 +40,7 @@ export function getAllPermutations(val, nrOfPeople) {
             }
 
             if (stopGenerating)
-                break;
+                continue;
         }
 
         if (stopGenerating)
