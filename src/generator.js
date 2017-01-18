@@ -44,7 +44,7 @@ export function getAllPermutations(val, nrOfPeople) {
         }
 
         if (stopGenerating)
-            break;
+            continue;
     }
 
     if (generatedFeatures.length > nrOfPeople)

@@ -22,8 +22,8 @@ export default class App extends Component {
     render() {
         return (
             <div className="App">
-                <input type="text" onInput={this.onInput}/>
-                <input type="text" onInput={this.onInput} defaultValue={this.state.nrOfPeople}/>
+                <input type="text" id="inputMixture" onInput={this.onInput}/>
+                <input type="text" id="nrOfPeople" onInput={this.onNrOfPeopleChanged} defaultValue={this.state.nrOfPeople}/>
                 Mixture:
                 <table>
                     <tbody>
@@ -68,18 +68,24 @@ export default class App extends Component {
         );
     }
 
-    onNrOfPeopleChanged(e) {
-        let input = e.target.value;
+    recalculate() {
+        let input = document.getElementById("nrOfPeople").value;
+        let inputMixture = document.getElementById("inputMixture").value;
         let nrOfPeople = Number(input);
-        this.setState({nrOfPeople: nrOfPeople});
+        let mixture = parse(inputMixture);
+        let variants = generateVariants(mixture);
+        let profiles = generate(mixture, nrOfPeople);
+        this.setState({mixture: mixture, allProfiles: profiles, variants: variants});
+    }
+
+    onNrOfPeopleChanged(e) {
+        if (e.target.value.length > 0)
+            this.recalculate();
     }
 
     onInput(e) {
-        let input = e.target.value;
-        let mixture = parse(input);
-        let variants = generateVariants(mixture);
-        let profiles = generate(mixture, this.state.nrOfPeople);
-        this.setState({mixture: mixture, allProfiles: profiles, variants: variants});
+        if (e.target.value.length > 1)
+            this.recalculate();
     }
 }
 
