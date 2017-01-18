@@ -7,6 +7,8 @@ export function parse(mixture) {
             continue;
 
         let variant = Number(mixture[i + 1])
+        if (variant != variant)
+            continue;
 
         if (variants[mixture[i]] == null)
             variants[mixture[i]] = [variant]

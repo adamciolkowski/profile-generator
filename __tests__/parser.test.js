@@ -34,3 +34,11 @@ test('Three features', () => {
                 C: [1, 2, 3]
             });
 })
+
+test('Second broken variant', () => {
+    let variants = parse('A1A');
+    expect(variants).toEqual(
+            {
+                A: [1],
+            });
+})
