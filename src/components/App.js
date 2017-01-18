@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {parse} from '../parser';
 import generate from '../generator';
+import generateVariants from '../variantsGenerator';
 import map from 'lodash/map';
 import './App.scss';
 
@@ -36,6 +37,22 @@ export default class App extends Component {
                     })}
                     </tbody>
                 </table>
+
+                Possible feature pairs:
+                <table>
+                    <tbody>
+                    {map(this.state.variants, (variants, allele) => {
+                        return (
+                            <tr key={allele}>
+                                <td>{allele}</td>
+                                <td>{variants.join(', ')}</td>
+                            </tr>
+                        );
+                    })}
+                    </tbody>
+                </table>
+
+                Combined profiles:
                 <table>
                     <tbody>
                     {map(this.state.allProfiles, (profileGroup, i) => {
@@ -60,8 +77,9 @@ export default class App extends Component {
     onInput(e) {
         let input = e.target.value;
         let mixture = parse(input);
+        let variants = generateVariants(mixture);
         let profiles = generate(mixture, this.state.nrOfPeople);
-        this.setState({mixture: mixture, allProfiles: profiles});
+        this.setState({mixture: mixture, allProfiles: profiles, variants: variants});
     }
 }
 
