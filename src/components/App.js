@@ -25,10 +25,10 @@ export default class App extends Component {
                 <input type="text" id="inputMixture" onInput={this.onInput}/>
                 <input type="number" min={1} id="nrOfPeople" onInput={this.onNrOfPeopleChanged} defaultValue={this.state.nrOfPeople}/>
 
-                <div id="mixture"></div>
-                <br/>
-                Mixture:
-                <table>
+                <div id="stageI" class="stage">
+                <div id="mixture" class="stage_horizontal_left"></div>
+                <div class="stage_horizontal_right">
+                <table id="mixture_table">
                     <tbody>
                     {map(this.state.mixture, (variants, allele) => {
                         return (
@@ -40,6 +40,8 @@ export default class App extends Component {
                     })}
                     </tbody>
                 </table>
+                </div>
+                </div>
 
                 Possible feature pairs:
                 <table>
@@ -95,11 +97,17 @@ export default class App extends Component {
         document.getElementById("mixture").innerHTML = "";
         let keysNumber = Object.keys(mixture).length;
         let keyNumber = 0;
+
+        var table = document.getElementById("mixture_table");
+        var rows = table.getElementsByTagName("tr");
         for (var k in mixture) {
-            let featuresRect = document.createElement("font");
-            featuresRect.id = "mixture_feature_" + k;
             let colorValue = this.colorForValue(keyNumber, keysNumber);
             let colorValue2 = 255-colorValue;
+            rows[keyNumber].style = "background-color:rgb("+colorValue+", "+colorValue2+", "+colorValue+")";
+
+
+            let featuresRect = document.createElement("font");
+            featuresRect.id = "mixture_feature_" + k;
             featuresRect.style = "background-color:rgb("+colorValue+", "+colorValue2+", "+colorValue+")";
             for (var j = 0, len2 = mixture[k].length; j < len2; j++) {
                 featuresRect.innerHTML += k+mixture[k][j];
@@ -112,8 +120,8 @@ export default class App extends Component {
 
     onInput(e) {
         if (e.target.value.length > 1) {
-            this.makeColouredMixture(parse(e.target.value));
             this.recalculate();
+            this.makeColouredMixture(parse(e.target.value));
         }
     }
 }

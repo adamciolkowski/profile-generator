@@ -5,3 +5,18 @@ table, thead, tbody, th, td, tr {
 table {
 	border-collapse: collapse;
 }
+
+div.stage {
+    overflow: auto;
+    background-color:green;
+}
+
+div.stage_horizontal_left {
+    display:block;
+    float:left;
+}
+
+div.stage_horizontal_right {
+    display:block;
+    float:right;
+}
