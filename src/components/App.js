@@ -24,6 +24,9 @@ export default class App extends Component {
             <div className="App">
                 <input type="text" id="inputMixture" onInput={this.onInput}/>
                 <input type="number" min={1} id="nrOfPeople" onInput={this.onNrOfPeopleChanged} defaultValue={this.state.nrOfPeople}/>
+
+                <div id="mixture"></div>
+                <br/>
                 Mixture:
                 <table>
                     <tbody>
@@ -84,9 +87,34 @@ export default class App extends Component {
             this.recalculate();
     }
 
+    colorForValue(i, len) {
+        return Math.ceil(55+200*i/len);
+    }
+
+    makeColouredMixture(mixture) {
+        document.getElementById("mixture").innerHTML = "";
+        let keysNumber = Object.keys(mixture).length;
+        let keyNumber = 0;
+        for (var k in mixture) {
+            let featuresRect = document.createElement("font");
+            featuresRect.id = "mixture_feature_" + k;
+            let colorValue = this.colorForValue(keyNumber, keysNumber);
+            let colorValue2 = 255-colorValue;
+            featuresRect.style = "background-color:rgb("+colorValue+", "+colorValue2+", "+colorValue+")";
+            for (var j = 0, len2 = mixture[k].length; j < len2; j++) {
+                featuresRect.innerHTML += k+mixture[k][j];
+            }
+
+            document.getElementById("mixture").appendChild(featuresRect);
+            keyNumber++;
+        }
+    }
+
     onInput(e) {
-        if (e.target.value.length > 1)
+        if (e.target.value.length > 1) {
+            this.makeColouredMixture(parse(e.target.value));
             this.recalculate();
+        }
     }
 }
 
