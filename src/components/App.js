@@ -25,9 +25,9 @@ export default class App extends Component {
                 <input type="text" id="inputMixture" onInput={this.onInput}/>
                 <input type="number" min={1} id="nrOfPeople" onInput={this.onNrOfPeopleChanged} defaultValue={this.state.nrOfPeople}/>
 
-                <div id="stageI" class="stage">
-                <div id="mixture" class="stage_horizontal_left"></div>
-                <div class="stage_horizontal_right">
+                <div id="stageI" className="stage">
+                <div id="mixture" className="stage_horizontal_left"></div>
+                <div className="stage_horizontal_right">
                 <table id="mixture_table">
                     <tbody>
                     {map(this.state.mixture, (variants, allele) => {
