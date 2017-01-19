@@ -7,16 +7,19 @@ table {
 }
 
 div.stage {
-    overflow: auto;
-    background-color:green;
+	overflow: auto;
 }
 
 div.stage_horizontal_left {
-    display:block;
-    float:left;
+	display:block;
+	float:left;
 }
 
 div.stage_horizontal_right {
-    display:block;
-    float:right;
+	display:block;
+	float:right;
+}
+
+.feature_block {
+	margin: 2px;
 }

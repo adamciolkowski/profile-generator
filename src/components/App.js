@@ -107,6 +107,7 @@ export default class App extends Component {
 
 
             let featuresRect = document.createElement("font");
+            featuresRect.className = "feature_block";
             featuresRect.id = "mixture_feature_" + k;
             featuresRect.style = "background-color:rgb("+colorValue+", "+colorValue2+", "+colorValue+")";
             for (var j = 0, len2 = mixture[k].length; j < len2; j++) {
