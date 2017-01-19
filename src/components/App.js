@@ -23,7 +23,7 @@ export default class App extends Component {
         return (
             <div className="App">
                 <input type="text" id="inputMixture" onInput={this.onInput}/>
-                <input type="text" id="nrOfPeople" onInput={this.onNrOfPeopleChanged} defaultValue={this.state.nrOfPeople}/>
+                <input type="number" min={1} id="nrOfPeople" onInput={this.onNrOfPeopleChanged} defaultValue={this.state.nrOfPeople}/>
                 Mixture:
                 <table>
                     <tbody>
@@ -58,6 +58,7 @@ export default class App extends Component {
                     {map(this.state.allProfiles, (profileGroup, i) => {
                         return (
                             <tr key={i}>
+                                <td>{i + 1}</td>
                                 <td key={i}>{profileGroup}</td>
                             </tr>
                         );
