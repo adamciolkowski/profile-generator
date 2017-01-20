@@ -20,21 +20,46 @@ export default class App extends Component {
     }
 
     render() {
+        var possibleValues = map(this.state.mixture, (values, key) => {
+            return {
+                allele: key,
+                variants: values
+            };
+        });
         return (
             <div className="App">
                 <input type="text" id="inputMixture" onInput={this.onInput}/>
                 <input type="number" min={1} id="nrOfPeople" onInput={this.onNrOfPeopleChanged} defaultValue={this.state.nrOfPeople}/>
 
                 <div id="stageI" className="stage">
-                <div id="mixture" className="stage_horizontal_left"></div>
+                    <div id="mixture" className="stage_horizontal_left">
+                        {
+                            possibleValues.map((values, i) => {
+                                let keysNumber = possibleValues.length;
+                                let colorValue = this.colorForValue(i, keysNumber);
+                                let colorValue2 = 255 - colorValue;
+                                let style = {
+                                    backgroundColor: `rgb(${colorValue}, ${colorValue2}, ${colorValue})`
+                                };
+                                let segment = values.variants.map(v => values.allele + v).join('');
+                                return <font key={i} className="feature_block" style={style}>{segment}</font>;
+                            })
+                        }
+                    </div>
                 <div className="stage_horizontal_right">
                 <table id="mixture_table">
                     <tbody>
-                    {map(this.state.mixture, (variants, allele) => {
+                    {map(possibleValues, (values, i) => {
+                        let keysNumber = possibleValues.length;
+                        let colorValue = this.colorForValue(i, keysNumber);
+                        let colorValue2 = 255 - colorValue;
+                        let style = {
+                            backgroundColor: `rgb(${colorValue}, ${colorValue2}, ${colorValue})`
+                        };
                         return (
-                            <tr key={allele}>
-                                <td>{allele}</td>
-                                <td>{variants.join(', ')}</td>
+                            <tr key={values.allele} style={style}>
+                                <td>{values.allele}</td>
+                                <td>{values.variants.join(', ')}</td>
                             </tr>
                         );
                     })}
@@ -93,36 +118,9 @@ export default class App extends Component {
         return Math.ceil(55+200*i/len);
     }
 
-    makeColouredMixture(mixture) {
-        document.getElementById("mixture").innerHTML = "";
-        let keysNumber = Object.keys(mixture).length;
-        let keyNumber = 0;
-
-        var table = document.getElementById("mixture_table");
-        var rows = table.getElementsByTagName("tr");
-        for (var k in mixture) {
-            let colorValue = this.colorForValue(keyNumber, keysNumber);
-            let colorValue2 = 255-colorValue;
-            rows[keyNumber].style = "background-color:rgb("+colorValue+", "+colorValue2+", "+colorValue+")";
-
-
-            let featuresRect = document.createElement("font");
-            featuresRect.className = "feature_block";
-            featuresRect.id = "mixture_feature_" + k;
-            featuresRect.style = "background-color:rgb("+colorValue+", "+colorValue2+", "+colorValue+")";
-            for (var j = 0, len2 = mixture[k].length; j < len2; j++) {
-                featuresRect.innerHTML += k+mixture[k][j];
-            }
-
-            document.getElementById("mixture").appendChild(featuresRect);
-            keyNumber++;
-        }
-    }
-
     onInput(e) {
         if (e.target.value.length > 1) {
             this.recalculate();
-            this.makeColouredMixture(parse(e.target.value));
         }
     }
 }
