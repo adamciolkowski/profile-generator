@@ -70,20 +70,7 @@ export default class App extends Component {
                 </div>
 
                 {this.renderStageTwo()}
-
-                Combined profiles:
-                <table>
-                    <tbody>
-                    {map(this.state.allProfiles, (profileGroup, i) => {
-                        return (
-                            <tr key={i}>
-                                <td>{i + 1}</td>
-                                <td key={i}>{profileGroup}</td>
-                            </tr>
-                        );
-                    })}
-                    </tbody>
-                </table>
+                {this.renderProfiles()}
             </div>
         );
     }
@@ -116,6 +103,26 @@ export default class App extends Component {
                         })
                     }
                 </VerticalLayout>
+            </div>
+        );
+    }
+
+    renderProfiles() {
+        return (
+            <div>
+                <b>Etap III - utworzone profile</b>
+                <table>
+                    <tbody>
+                    {map(this.state.allProfiles, (profileGroup, i) => {
+                        return (
+                            <tr key={i}>
+                                <td>{i + 1}</td>
+                                <td key={i}>{profileGroup}</td>
+                            </tr>
+                        );
+                    })}
+                    </tbody>
+                </table>
             </div>
         );
     }
