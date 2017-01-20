@@ -5,6 +5,7 @@ import containsAll from './containsAll';
 import flattenDeep from 'lodash/flattenDeep';
 import isEqual from 'lodash/isEqual';
 import slice from 'lodash/slice';
+import chunk from 'lodash/chunk';
 import sortBy from 'lodash/sortBy';
 import uniqWith from 'lodash/uniqWith';
 import values from 'lodash/values';
@@ -15,9 +16,14 @@ export default function generate(mixture, nrOfPeople) {
     let variants = generateVariants(mixture);
     let val = values(variants);
     let allProfiles = getAllPermutations(val, nrOfPeople);
-
     console.log('v', val, '->', allProfiles);
-    return allProfiles;
+
+    let allProfilesCharacters=[];
+    for (let i = 0, len = allProfiles.length; i < len; i++) {
+        allProfilesCharacters.push(allProfiles[i].split('.'));
+    }
+
+    return allProfilesCharacters;
 }
 
 export function getAllPermutations(val, nrOfPeople) {
@@ -28,7 +34,7 @@ export function getAllPermutations(val, nrOfPeople) {
         for (let j = 0; j < lastLength; j++) {
             let featureToJoin = generatedFeatures[j]
             for (let k = 0; k < val[i].length; k++) {
-                let joinedElement = featureToJoin + val[i][k];
+                let joinedElement = featureToJoin + '.' + val[i][k];
                 if (k == 0)
                     generatedFeatures[j] = joinedElement;
                 else if (generatedFeatures.length < nrOfPeople)
