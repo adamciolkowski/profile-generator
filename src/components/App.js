@@ -3,8 +3,14 @@ import {parse} from '../parser';
 import generate from '../generator';
 import generateVariants from '../variantsGenerator';
 import map from 'lodash/map';
+import randomcolor from 'randomcolor';
 import VerticalLayout from './VerticalLayout'
 import './App.scss';
+
+const colors = randomcolor({
+    count: 50,
+    hue: 'bright'
+});
 
 export default class App extends Component {
 
@@ -36,11 +42,8 @@ export default class App extends Component {
                     <div id="mixture" className="stage_horizontal_left">
                         {
                             possibleValues.map((values, i) => {
-                                let keysNumber = possibleValues.length;
-                                let colorValue = this.colorForValue(i, keysNumber);
-                                let colorValue2 = 255 - colorValue;
                                 let style = {
-                                    backgroundColor: `rgb(${colorValue}, ${colorValue2}, ${colorValue})`
+                                    backgroundColor: this.colorForValue(i)
                                 };
                                 let segment = values.variants.map(v => values.allele + v).join('');
                                 return <font key={i} className="feature_block" style={style}>{segment}</font>;
@@ -51,11 +54,8 @@ export default class App extends Component {
                 <table id="mixture_table">
                     <tbody>
                     {map(possibleValues, (values, i) => {
-                        let keysNumber = possibleValues.length;
-                        let colorValue = this.colorForValue(i, keysNumber);
-                        let colorValue2 = 255 - colorValue;
                         let style = {
-                            backgroundColor: `rgb(${colorValue}, ${colorValue2}, ${colorValue})`
+                            backgroundColor: this.colorForValue(i)
                         };
                         return (
                             <tr key={values.allele} style={style}>
@@ -142,8 +142,8 @@ export default class App extends Component {
             this.recalculate();
     }
 
-    colorForValue(i, len) {
-        return Math.ceil(55+200*i/len);
+    colorForValue(i) {
+        return colors[i % colors.length];
     }
 
     onInput(e) {
