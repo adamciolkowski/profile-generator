@@ -69,19 +69,6 @@ export default class App extends Component {
                 </div>
                 </div>
 
-                Possible feature pairs:
-                <table>
-                    <tbody>
-                    {map(this.state.variants, (variants, allele) => {
-                        return (
-                            <tr key={allele}>
-                                <td>{allele}</td>
-                                <td>{variants.join(', ')}</td>
-                            </tr>
-                        );
-                    })}
-                    </tbody>
-                </table>
                 {this.renderStageTwo()}
 
                 Combined profiles:
@@ -104,7 +91,7 @@ export default class App extends Component {
     renderStageTwo() {
         return (
             <div>
-                Etap II - generowanie możliwych par
+                <b>Etap II - generowanie możliwych par</b>
                 <VerticalLayout className="stage-container">
                     {
                         map(this.state.variants, pairs => {
@@ -158,7 +145,3 @@ export default class App extends Component {
         }
     }
 }
-
-App.propTypes = {};
-
-App.defaultProps = {};
