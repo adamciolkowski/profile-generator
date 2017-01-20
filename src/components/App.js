@@ -3,6 +3,7 @@ import {parse} from '../parser';
 import generate from '../generator';
 import generateVariants from '../variantsGenerator';
 import map from 'lodash/map';
+import VerticalLayout from './VerticalLayout'
 import './App.scss';
 
 export default class App extends Component {
@@ -81,6 +82,7 @@ export default class App extends Component {
                     })}
                     </tbody>
                 </table>
+                {this.renderStageTwo()}
 
                 Combined profiles:
                 <table>
@@ -95,6 +97,38 @@ export default class App extends Component {
                     })}
                     </tbody>
                 </table>
+            </div>
+        );
+    }
+
+    renderStageTwo() {
+        return (
+            <div>
+                Etap II - generowanie możliwych par
+                <VerticalLayout className="stage-container">
+                    {
+                        map(this.state.variants, pairs => {
+                            return (
+                                <div className="pair-box">
+                                    <div className="center-horizontally center-vertically inline">
+                                        <table className="pairs">
+                                            <tbody>
+                                            {
+                                                map(pairs, pair => {
+                                                    return (
+                                                        <tr>
+                                                            <td>{pair}</td>
+                                                        </tr>
+                                                    );
+                                                })}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            );
+                        })
+                    }
+                </VerticalLayout>
             </div>
         );
     }
