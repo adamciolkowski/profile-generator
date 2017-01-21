@@ -3,14 +3,9 @@ import {parse} from '../parser';
 import generate from '../generator';
 import generateVariants from '../variantsGenerator';
 import map from 'lodash/map';
-import randomcolor from 'randomcolor';
+import ParesedMixture from './ParsedMixture';
 import PossiblePairs from './PossiblePairs';
 import './App.scss';
-
-const colors = randomcolor({
-    count: 50,
-    hue: 'bright'
-});
 
 export default class App extends Component {
 
@@ -49,38 +44,7 @@ export default class App extends Component {
                 variants: values
             };
         });
-        return (
-            <div id="stageI" className="stage">
-                <div id="mixture" className="stage_horizontal_left">
-                    {
-                        possibleValues.map((values, i) => {
-                            let style = {
-                                backgroundColor: this.colorForValue(i)
-                            };
-                            let segment = values.variants.map(v => values.allele + v).join('');
-                            return <font key={i} className="feature_block" style={style}>{segment}</font>;
-                        })
-                    }
-                </div>
-                <div className="stage_horizontal_right">
-                    <table id="mixture_table">
-                        <tbody>
-                        {map(possibleValues, (values, i) => {
-                            let style = {
-                                backgroundColor: this.colorForValue(i)
-                            };
-                            return (
-                                <tr key={values.allele} style={style}>
-                                    <td>{values.allele}</td>
-                                    <td>{values.variants.join(', ')}</td>
-                                </tr>
-                            );
-                        })}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        );
+        return <ParesedMixture possibleValues={possibleValues}/>
     }
 
     renderProfiles() {
@@ -127,10 +91,6 @@ export default class App extends Component {
     onNrOfPeopleChanged(e) {
         if (e.target.value.length > 0)
             this.recalculate();
-    }
-
-    colorForValue(i) {
-        return colors[i % colors.length];
     }
 
     onInput(e) {
