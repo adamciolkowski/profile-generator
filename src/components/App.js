@@ -26,13 +26,21 @@ export default class App extends Component {
     render() {
         return (
             <div className="App">
-                <input type="text" id="inputMixture" onInput={this.onInput}/>
-                <input type="number" min={1} id="nrOfPeople" onInput={this.onNrOfPeopleChanged} defaultValue={this.state.nrOfPeople}/>
-
+                {this.renderInputs()}
                 {this.renderParsedMixture()}
                 <PossiblePairs variants={this.state.variants}
                                highlightedPairs={this.state.highlightedPairs}/>
                 {this.renderProfiles()}
+            </div>
+        );
+    }
+
+    renderInputs() {
+        return (
+            <div>
+                <input type="text" id="inputMixture" onInput={this.onInput}/>
+                <input type="number" min={1} id="nrOfPeople" onInput={this.onNrOfPeopleChanged}
+                       defaultValue={this.state.nrOfPeople}/>
             </div>
         );
     }
