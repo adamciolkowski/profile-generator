@@ -17,8 +17,8 @@ export default class ParsedMixture extends Component {
 
     render() {
         return (
-            <div id="stageI" className="stage">
-                <div id="mixture" className="stage_horizontal_left">
+            <div className="stage">
+                <div className="stage_horizontal_left">
                     {
                         this.props.possibleValues.map((values, i) => {
                             let style = {
@@ -30,7 +30,7 @@ export default class ParsedMixture extends Component {
                     }
                 </div>
                 <div className="stage_horizontal_right">
-                    <table id="mixture_table">
+                    <table>
                         <tbody>
                         {map(this.props.possibleValues, (values, i) => {
                             let style = {
