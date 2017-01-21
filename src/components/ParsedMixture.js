@@ -1,13 +1,11 @@
 import React, {Component, PropTypes} from 'react';
 import isEmpty from 'lodash/isEmpty'
 import map from 'lodash/map';
-import randomcolor from 'randomcolor';
+import range from 'lodash/range';
+import randomColor from 'random-color';
 import './ParsedMixture.scss';
 
-const colors = randomcolor({
-    count: 50,
-    hue: 'bright'
-});
+const colors = range(1, 50).map(() => randomColor().hexString());
 
 export default class ParsedMixture extends Component {
 
