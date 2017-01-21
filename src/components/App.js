@@ -38,9 +38,15 @@ export default class App extends Component {
     renderInputs() {
         return (
             <div>
-                <input type="text" id="inputMixture" onInput={this.onInput}/>
-                <input type="number" min={1} id="nrOfPeople" onInput={this.onNrOfPeopleChanged}
-                       defaultValue={this.state.nrOfPeople}/>
+                <b>Wprowadź parametry:</b>
+                <div className="stage-container">
+                    <input type="text" id="inputMixture" className="mixture-input"
+                           placeholder="Mieszanina" onInput={this.onInput}/>
+                    <input type="number" min={1} id="nrOfPeople" className="nr-of-people-input"
+                           placeholder="Liczba osób"
+                           onInput={this.onNrOfPeopleChanged}
+                           defaultValue={this.state.nrOfPeople}/>
+                </div>
             </div>
         );
     }
