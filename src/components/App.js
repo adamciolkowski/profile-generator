@@ -83,16 +83,16 @@ export default class App extends Component {
                 <b>Etap II - generowanie możliwych par</b>
                 <VerticalLayout className="stage-container">
                     {
-                        map(this.state.variants, pairs => {
+                        map(this.state.variants, (pairs, key) => {
                             return (
-                                <div className="pair-box">
+                                <div key={key} className="pair-box">
                                     <div className="center-horizontally center-vertically inline">
                                         <table className="pairs">
                                             <tbody>
                                             {
-                                                map(pairs, pair => {
+                                                map(pairs, (pair, i) => {
                                                     return (
-                                                        <tr>
+                                                        <tr key={i}>
                                                             <td className={this.classFor(pair)}>{pair}</td>
                                                         </tr>
                                                     );
