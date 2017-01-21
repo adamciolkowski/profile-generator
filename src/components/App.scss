@@ -48,4 +48,13 @@ div.stage_horizontal_right {
 
 .pairs td {
 	padding: 5px 16px;
+	transition: background-color 0.25s ease-out;
+}
+
+.highlighted {
+	background-color: rgba(242, 235, 72, 0.85);
+}
+
+.generated-profile {
+	cursor: pointer;
 }

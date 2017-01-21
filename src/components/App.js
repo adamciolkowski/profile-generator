@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {parse} from '../parser';
 import generate from '../generator';
 import generateVariants from '../variantsGenerator';
+import includes from 'lodash/includes'
 import map from 'lodash/map';
 import randomcolor from 'randomcolor';
 import VerticalLayout from './VerticalLayout'
@@ -19,7 +20,8 @@ export default class App extends Component {
         this.state = {
             nrOfPeople: 3,
             mixture: {},
-            allProfiles: []
+            allProfiles: [],
+            highlightedPairs: []
         };
 
         this.onInput = this.onInput.bind(this);
@@ -91,7 +93,7 @@ export default class App extends Component {
                                                 map(pairs, pair => {
                                                     return (
                                                         <tr>
-                                                            <td>{pair}</td>
+                                                            <td className={this.classFor(pair)}>{pair}</td>
                                                         </tr>
                                                     );
                                                 })}
@@ -107,6 +109,10 @@ export default class App extends Component {
         );
     }
 
+    classFor(pair) {
+        return includes(this.state.highlightedPairs, pair) ? 'highlighted' : null;
+    }
+
     renderProfiles() {
         return (
             <div>
@@ -115,7 +121,10 @@ export default class App extends Component {
                     <tbody>
                     {map(this.state.allProfiles, (profileGroup, i) => {
                         return (
-                            <tr key={i}>
+                            <tr key={i}
+                                className="generated-profile"
+                                onMouseEnter={() => this.highlightPairs(profileGroup)}
+                                onMouseLeave={() => this.clearHighlight()}>
                                 <td>{i + 1}</td>
                                 <td key={i}>{profileGroup}</td>
                             </tr>
@@ -125,6 +134,14 @@ export default class App extends Component {
                 </table>
             </div>
         );
+    }
+
+    highlightPairs(pairs) {
+        this.setState({highlightedPairs: pairs});
+    }
+
+    clearHighlight() {
+        this.highlightPairs([]);
     }
 
     recalculate() {
