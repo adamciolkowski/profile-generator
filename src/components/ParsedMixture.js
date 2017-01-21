@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import map from 'lodash/map';
 import randomcolor from 'randomcolor';
+import './ParsedMixture.scss';
 
 const colors = randomcolor({
     count: 50,
