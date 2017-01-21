@@ -29,51 +29,56 @@ export default class App extends Component {
     }
 
     render() {
-        var possibleValues = map(this.state.mixture, (values, key) => {
+        return (
+            <div className="App">
+                <input type="text" id="inputMixture" onInput={this.onInput}/>
+                <input type="number" min={1} id="nrOfPeople" onInput={this.onNrOfPeopleChanged} defaultValue={this.state.nrOfPeople}/>
+
+                {this.renderParsedMixture()}
+                <PossiblePairs variants={this.state.variants}
+                               highlightedPairs={this.state.highlightedPairs}/>
+                {this.renderProfiles()}
+            </div>
+        );
+    }
+
+    renderParsedMixture() {
+        let possibleValues = map(this.state.mixture, (values, key) => {
             return {
                 allele: key,
                 variants: values
             };
         });
         return (
-            <div className="App">
-                <input type="text" id="inputMixture" onInput={this.onInput}/>
-                <input type="number" min={1} id="nrOfPeople" onInput={this.onNrOfPeopleChanged} defaultValue={this.state.nrOfPeople}/>
-
-                <div id="stageI" className="stage">
-                    <div id="mixture" className="stage_horizontal_left">
-                        {
-                            possibleValues.map((values, i) => {
-                                let style = {
-                                    backgroundColor: this.colorForValue(i)
-                                };
-                                let segment = values.variants.map(v => values.allele + v).join('');
-                                return <font key={i} className="feature_block" style={style}>{segment}</font>;
-                            })
-                        }
-                    </div>
+            <div id="stageI" className="stage">
+                <div id="mixture" className="stage_horizontal_left">
+                    {
+                        possibleValues.map((values, i) => {
+                            let style = {
+                                backgroundColor: this.colorForValue(i)
+                            };
+                            let segment = values.variants.map(v => values.allele + v).join('');
+                            return <font key={i} className="feature_block" style={style}>{segment}</font>;
+                        })
+                    }
+                </div>
                 <div className="stage_horizontal_right">
-                <table id="mixture_table">
-                    <tbody>
-                    {map(possibleValues, (values, i) => {
-                        let style = {
-                            backgroundColor: this.colorForValue(i)
-                        };
-                        return (
-                            <tr key={values.allele} style={style}>
-                                <td>{values.allele}</td>
-                                <td>{values.variants.join(', ')}</td>
-                            </tr>
-                        );
-                    })}
-                    </tbody>
-                </table>
+                    <table id="mixture_table">
+                        <tbody>
+                        {map(possibleValues, (values, i) => {
+                            let style = {
+                                backgroundColor: this.colorForValue(i)
+                            };
+                            return (
+                                <tr key={values.allele} style={style}>
+                                    <td>{values.allele}</td>
+                                    <td>{values.variants.join(', ')}</td>
+                                </tr>
+                            );
+                        })}
+                        </tbody>
+                    </table>
                 </div>
-                </div>
-
-                <PossiblePairs variants={this.state.variants}
-                               highlightedPairs={this.state.highlightedPairs}/>
-                {this.renderProfiles()}
             </div>
         );
     }
