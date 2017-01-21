@@ -28,11 +28,25 @@ export default class App extends Component {
             <div className="App">
                 {this.renderInputs()}
                 {this.renderParsedMixture()}
+                <input type="button" value="Next stage" className="next-stage-input" onClick={this.stageTwo}/>
+                <div id="secondStage" className="hidden">
                 <PossiblePairs variants={this.state.variants}
                                highlightedPairs={this.state.highlightedPairs}/>
+                <input type="button" value="Next stage" className="next-stage-input" onClick={this.stageThree}/>
+                </div>
+                <div id="thirdStage" className="hidden">
                 {this.renderProfiles()}
+                </div>
             </div>
         );
+    }
+
+    stageTwo() {
+        document.getElementById("secondStage").style.display = 'block';
+    }
+
+    stageThree() {
+        document.getElementById("thirdStage").style.display = 'block';
     }
 
     renderInputs() {

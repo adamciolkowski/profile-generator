@@ -12,6 +12,11 @@ div.stage {
   float:right;
 }
 
+input.next_stage {
+  display: inline-block;
+  width: 100%;
+}
+
 .parsed-mixture {
   margin: 30px;
   border: 2px solid $border-color;
