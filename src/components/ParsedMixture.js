@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+import isEmpty from 'lodash/isEmpty'
 import map from 'lodash/map';
 import randomcolor from 'randomcolor';
 import './ParsedMixture.scss';
@@ -19,15 +20,7 @@ export default class ParsedMixture extends Component {
         return (
             <div className="stage">
                 <div className="stage_horizontal_left">
-                    {
-                        this.props.possibleValues.map((values, i) => {
-                            let style = {
-                                backgroundColor: this.colorForValue(i)
-                            };
-                            let segment = values.variants.map(v => values.allele + v).join('');
-                            return <font key={i} className="feature_block" style={style}>{segment}</font>;
-                        })
-                    }
+                    {this.renderParsedMixture()}
                 </div>
                 <div className="stage_horizontal_right">
                     <table>
@@ -48,6 +41,25 @@ export default class ParsedMixture extends Component {
                 </div>
             </div>
         );
+    }
+
+    renderParsedMixture() {
+        if (isEmpty(this.props.possibleValues))
+            return null;
+        return (
+            <div className="parsed-mixture">
+                {this.props.possibleValues.map((values, i) =>
+                    this.renderSegment(values, i))}
+            </div>
+        );
+    }
+
+    renderSegment(values, i) {
+        let style = {
+            backgroundColor: this.colorForValue(i)
+        };
+        let segment = values.variants.map(v => values.allele + v).join('');
+        return <div key={i} className="feature-block inline" style={style}>{segment}</div>;
     }
 
     colorForValue(i) {

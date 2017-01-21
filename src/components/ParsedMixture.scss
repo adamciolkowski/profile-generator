@@ -1,13 +1,26 @@
+$border-color: black;
+
 div.stage {
   overflow: auto;
 }
 
-div.stage_horizontal_left {
-  display:block;
-  float:left;
+.stage_horizontal_left {
+  display: inline-block;
 }
 
-div.stage_horizontal_right {
-  display:block;
+.stage_horizontal_right {
   float:right;
+}
+
+.parsed-mixture {
+  margin: 30px;
+  border: 2px solid $border-color;
+  border-right-width: 1px;
+  border-left-width: 1px;
+}
+
+.feature-block {
+  padding: 5px 10px;
+  border-right: 1px solid $border-color;
+  border-left: 1px solid $border-color;
 }
