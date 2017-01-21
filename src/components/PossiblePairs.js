@@ -15,30 +15,35 @@ export default class PossiblePairs extends Component {
             <div>
                 <b>Etap II - generowanie możliwych par</b>
                 <VerticalLayout className="stage-container">
-                    {
-                        map(this.props.variants, (pairs, key) => {
-                            return (
-                                <div key={key} className="pair-box">
-                                    <div className="center-horizontally center-vertically inline">
-                                        <table className="pairs">
-                                            <tbody>
-                                            {
-                                                map(pairs, (pair, i) => {
-                                                    return (
-                                                        <tr key={i}>
-                                                            <td className={this.classFor(pair)}>{pair}</td>
-                                                        </tr>
-                                                    );
-                                                })}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            );
-                        })
-                    }
+                    {this.renderVariants(this.props.variants)}
                 </VerticalLayout>
             </div>
+        );
+    }
+
+    renderVariants(variants) {
+        return map(variants, this.renderPairs.bind(this));
+    }
+
+    renderPairs(pairs, key) {
+        return (
+            <div key={key} className="pair-box">
+                <div className="center-horizontally center-vertically inline">
+                    <table className="pairs">
+                        <tbody>
+                        {map(pairs, this.renderPair.bind(this))}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        );
+    }
+
+    renderPair(pair, i) {
+        return (
+            <tr key={i}>
+                <td className={this.classFor(pair)}>{pair}</td>
+            </tr>
         );
     }
 
