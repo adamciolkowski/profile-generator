@@ -28,33 +28,6 @@ div.stage_horizontal_right {
 	margin: 2px;
 }
 
-.stage-container {
-	padding: 30px;
-	border: 1px solid black;
-}
-
-.pair-box {
-	text-align: center;
-	margin: 0 auto;
-}
-
-.center-horizontally {
-	display: inline-block;
-}
-
-.center-vertically {
-	vertical-align: top;
-}
-
-.pairs td {
-	padding: 5px 16px;
-	transition: background-color 0.25s ease-out;
-}
-
-.highlighted {
-	background-color: rgba(242, 235, 72, 0.85);
-}
-
 .generated-profile {
 	cursor: pointer;
 }
