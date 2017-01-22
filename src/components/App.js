@@ -79,21 +79,23 @@ export default class App extends Component {
         return (
             <div>
                 <b>Etap III - utworzone profile</b>
-                <table>
-                    <tbody>
-                    {map(this.state.allProfiles, (profileGroup, i) => {
-                        return (
-                            <tr key={i}
-                                className="generated-profile"
-                                onMouseEnter={() => this.highlightPairs(profileGroup)}
-                                onMouseLeave={() => this.clearHighlight()}>
-                                <td>{i + 1}</td>
-                                <td key={i}>{profileGroup}</td>
-                            </tr>
-                        );
-                    })}
-                    </tbody>
-                </table>
+                <div className="stage-container">
+                    <table className="profile-table">
+                        <tbody>
+                        {map(this.state.allProfiles, (profileGroup, i) => {
+                            return (
+                                <tr key={i}
+                                    className="generated-profile"
+                                    onMouseEnter={() => this.highlightPairs(profileGroup)}
+                                    onMouseLeave={() => this.clearHighlight()}>
+                                    <td>{i + 1}</td>
+                                    <td key={i}>{profileGroup}</td>
+                                </tr>
+                            );
+                        })}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         );
     }
