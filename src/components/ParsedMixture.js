@@ -1,11 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 import isEmpty from 'lodash/isEmpty'
 import map from 'lodash/map';
-import range from 'lodash/range';
-import randomColor from 'random-color';
+import colorFor from './ColorSource';
 import './ParsedMixture.scss';
-
-const colors = range(1, 50).map(() => randomColor().hexString());
 
 export default class ParsedMixture extends Component {
 
@@ -25,7 +22,7 @@ export default class ParsedMixture extends Component {
                         <tbody>
                         {map(this.props.possibleValues, (values, i) => {
                             let style = {
-                                backgroundColor: this.colorForValue(i)
+                                backgroundColor: colorFor(i)
                             };
                             return (
                                 <tr key={values.allele} style={style}>
@@ -54,14 +51,10 @@ export default class ParsedMixture extends Component {
 
     renderSegment(values, i) {
         let style = {
-            backgroundColor: this.colorForValue(i)
+            backgroundColor: colorFor(i)
         };
         let segment = values.variants.map(v => values.allele + v).join('');
         return <div key={i} className="feature-block inline" style={style}>{segment}</div>;
-    }
-
-    colorForValue(i) {
-        return colors[i % colors.length];
     }
 }
 
