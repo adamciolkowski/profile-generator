@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {parse} from '../parser';
 import generate from '../generator';
 import generateVariants from '../variantsGenerator';
+import identity from 'lodash/identity';
 import map from 'lodash/map';
 import ParesedMixture from './ParsedMixture';
 import PossiblePairs from './PossiblePairs';
@@ -24,13 +25,14 @@ export default class App extends Component {
     }
 
     render() {
+        let pairsOfVariants = map(this.state.variants, identity);
         return (
             <div className="App">
                 {this.renderInputs()}
                 {this.renderParsedMixture()}
                 <input type="button" value="Next stage" className="next-stage-input" onClick={this.stageTwo}/>
                 <div id="secondStage" className="hidden">
-                <PossiblePairs variants={this.state.variants}
+                <PossiblePairs variants={pairsOfVariants}
                                highlightedPairs={this.state.highlightedPairs}/>
                 <input type="button" value="Next stage" className="next-stage-input" onClick={this.stageThree}/>
                 </div>

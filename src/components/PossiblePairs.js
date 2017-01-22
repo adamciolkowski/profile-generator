@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import VerticalLayout from './VerticalLayout';
+import colorFor from './ColorSource';
 import includes from 'lodash/includes';
 import map from 'lodash/map';
 import './PossiblePairs.scss';
@@ -25,11 +26,14 @@ export default class PossiblePairs extends Component {
         return map(variants, this.renderPairs.bind(this));
     }
 
-    renderPairs(pairs, key) {
+    renderPairs(pairs, i) {
+        let style = {
+            backgroundColor: colorFor(i)
+        };
         return (
-            <div key={key} className="pair-box">
+            <div key={i} className="pair-box">
                 <div className="center-horizontally center-vertically inline">
-                    <table className="pairs">
+                    <table className="pairs" style={style}>
                         <tbody>
                         {map(pairs, this.renderPair.bind(this))}
                         </tbody>
@@ -54,6 +58,6 @@ export default class PossiblePairs extends Component {
 }
 
 PossiblePairs.propTypes = {
-    variants: PropTypes.object.isRequired,
+    variants: PropTypes.arrayOf(PropTypes.array).isRequired,
     highlightedPairs: PropTypes.array.isRequired
 };
