@@ -16,7 +16,6 @@ export default function generate(mixture, nrOfPeople) {
     let variants = generateVariants(mixture);
     let val = values(variants);
     let allProfiles = getAllPermutations(val, nrOfPeople);
-    console.log('v', val, '->', allProfiles);
 
     let allProfilesCharacters=[];
     for (let i = 0, len = allProfiles.length; i < len; i++) {
