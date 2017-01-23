@@ -8,7 +8,6 @@ export default class ParsedMixture extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {};
     }
 
     render() {
