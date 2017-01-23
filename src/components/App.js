@@ -3,6 +3,7 @@ import {parse} from '../parser';
 import generate from '../generator';
 import generateVariants from '../variantsGenerator';
 import identity from 'lodash/identity';
+import isEmpty from 'lodash/isEmpty';
 import map from 'lodash/map';
 import ParesedMixture from './ParsedMixture';
 import PossiblePairs from './PossiblePairs';
@@ -28,6 +29,7 @@ export default class App extends Component {
 
     render() {
         let pairsOfVariants = map(this.state.variants, identity);
+        let isMixtureEntered = !isEmpty(this.state.mixture);
         return (
             <div className="App">
                 <div id="comment" className="comment-layer">
@@ -35,11 +37,13 @@ export default class App extends Component {
                 </div>
                 {this.renderInputs()}
                 {this.renderParsedMixture()}
-                <input type="button" value="Następny etap" className="next-stage-input" onClick={this.stageTwo} id="stageTwoButton"/>
+                <input type="button" value="Następny etap" className="next-stage-input" disabled={!isMixtureEntered}
+                       onClick={this.stageTwo} id="stageTwoButton"/>
                 <div id="secondStage" className="hidden">
                 <PossiblePairs variants={pairsOfVariants}
                                highlightedPairs={this.state.highlightedPairs}/>
-                <input type="button" value="Następny etap" className="next-stage-input" onClick={this.stageThree} id="stageThreeButton"/>
+                <input type="button" value="Następny etap" className="next-stage-input" disabled={!isMixtureEntered}
+                       onClick={this.stageThree} id="stageThreeButton"/>
                 </div>
                 <div id="thirdStage" className="hidden">
                 {this.renderProfiles()}
