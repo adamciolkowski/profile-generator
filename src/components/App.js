@@ -25,6 +25,7 @@ export default class App extends Component {
         this.onNrOfPeopleChanged = this.onNrOfPeopleChanged.bind(this);
         this.stageTwo = this.stageTwo.bind(this);
         this.stageThree = this.stageThree.bind(this);
+        this.generateRandomMixture = this.generateRandomMixture.bind(this);
     }
 
     render() {
@@ -90,6 +91,8 @@ export default class App extends Component {
                            placeholder="Liczba osób"
                            onInput={this.onNrOfPeopleChanged}
                            defaultValue={this.state.nrOfPeople}/>
+                    <input type="button" className="mixture-input"
+                           value="Losowa mieszanina" onClick={this.generateRandomMixture}/>
                 </div>
             </div>
         );
@@ -136,6 +139,26 @@ export default class App extends Component {
 
     clearHighlight() {
         this.highlightPairs([]);
+    }
+
+    generateRandomMixture() {
+        var mixture="";
+        var characters=[];
+        for (var i = 0; i < 4; i++) {
+            var character = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 1);
+            if (characters.indexOf(character) != -1) {
+                i--;
+                continue;
+            }
+            characters.push(character);
+            
+            for (var j = 1, len = Math.random() * 3 + 2; j < len; j++) {
+                mixture += character + j;
+            }
+        }
+        
+        inputMixture.value = mixture;
+        this.recalculate();
     }
 
     recalculate() {
