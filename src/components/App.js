@@ -33,11 +33,11 @@ export default class App extends Component {
                 </div>
                 {this.renderInputs()}
                 {this.renderParsedMixture()}
-                <input type="button" value="Next stage" className="next-stage-input" onClick={this.stageTwo}/>
+                <input type="button" value="Następny etap" className="next-stage-input" onClick={this.stageTwo} id="stageTwoButton"/>
                 <div id="secondStage" className="hidden">
                 <PossiblePairs variants={this.state.variants}
                                highlightedPairs={this.state.highlightedPairs}/>
-                <input type="button" value="Next stage" className="next-stage-input" onClick={this.stageThree}/>
+                <input type="button" value="Następny etap" className="next-stage-input" onClick={this.stageThree} id="stageThreeButton"/>
                 </div>
                 <div id="thirdStage" className="hidden">
                 {this.renderProfiles()}
@@ -60,12 +60,14 @@ export default class App extends Component {
     }
 
     stageTwo() {
+        document.getElementById("stageTwoButton").style.display = 'none';
         document.getElementById("secondStage").style.display = 'block';
         document.getElementById("comment").innerHTML = 'Dla każdej cechy generowane są jej wszystkie możliwe kombinacje';
         this.moveCommentToDiv("secondStage");
     }
 
     stageThree() {
+        document.getElementById("stageThreeButton").style.display = 'none';
         document.getElementById("thirdStage").style.display = 'block';
         document.getElementById("comment").innerHTML = 'Profil powstaje przez złożenie wszystkich możliwych par cech';
         this.moveCommentToDiv("thirdStage");
