@@ -18,7 +18,7 @@ export default class ParsedMixture extends Component {
                     {this.renderParsedMixture()}
                 </div>
                 <div className="stage_horizontal_right">
-                    <table>
+                    <table className="parsed-table">
                         <tbody>
                         {map(this.props.possibleValues, (values, i) => {
                             let style = {
@@ -26,8 +26,8 @@ export default class ParsedMixture extends Component {
                             };
                             return (
                                 <tr key={values.allele} style={style}>
-                                    <td>{values.allele}</td>
-                                    <td>{values.variants.join(', ')}</td>
+                                    <td className="parsed-table-name"><b>{values.allele}</b></td>
+                                    <td className="parsed-table">{values.variants.join(', ')}</td>
                                 </tr>
                             );
                         })}

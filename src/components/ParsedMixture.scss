@@ -29,3 +29,21 @@ input.next_stage {
   border-right: 1px solid $border-color;
   border-left: 1px solid $border-color;
 }
+
+table.parsed-table {
+  width: 150px;
+  margin: 30px;
+  border: 2px solid black;
+  border-right-width: 2px;
+  border-left-width: 2px;
+}
+
+td.parsed-table-name {
+  width: 6px;
+  padding: 4px;
+  border: 1px solid black;
+}
+
+td.parsed-table {
+  padding: 4px;
+}
