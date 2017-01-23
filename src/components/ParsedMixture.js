@@ -12,26 +12,30 @@ export default class ParsedMixture extends Component {
 
     render() {
         return (
-            <div className="stage">
-                <div className="stage_horizontal_left">
-                    {this.renderParsedMixture()}
-                </div>
-                <div className="stage_horizontal_right">
-                    <table className="parsed-table">
-                        <tbody>
-                        {map(this.props.possibleValues, (values, i) => {
-                            let style = {
-                                backgroundColor: colorFor(i)
-                            };
-                            return (
-                                <tr key={values.allele} style={style}>
-                                    <td className="parsed-table-name"><b>{values.allele}</b></td>
-                                    <td className="parsed-table">{values.variants.join(', ')}</td>
-                                </tr>
-                            );
-                        })}
-                        </tbody>
-                    </table>
+
+            <div className="stage-separator">
+                <b>Etap I - znajdowanie wariantów cech:</b>
+                <div className="stage-container">
+                    <div className="stage_horizontal_left">
+                        {this.renderParsedMixture()}
+                    </div>
+                    <div className="stage_horizontal_right">
+                        <table className="parsed-table">
+                            <tbody>
+                            {map(this.props.possibleValues, (values, i) => {
+                                let style = {
+                                    backgroundColor: colorFor(i)
+                                };
+                                return (
+                                    <tr key={values.allele} style={style}>
+                                        <td className="parsed-table-name"><b>{values.allele}</b></td>
+                                        <td className="parsed-table">{values.variants.join(', ')}</td>
+                                    </tr>
+                                );
+                            })}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         );

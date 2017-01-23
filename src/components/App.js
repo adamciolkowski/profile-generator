@@ -110,7 +110,7 @@ export default class App extends Component {
 
     renderProfiles() {
         return (
-            <div>
+            <div className="stage-separator">
                 <b>Etap III - utworzone profile</b>
                 <div className="stage-container">
                     <table className="profile-table">

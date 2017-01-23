@@ -13,7 +13,7 @@ export default class PossiblePairs extends Component {
 
     render() {
         return (
-            <div>
+            <div className="stage-separator">
                 <b>Etap II - generowanie możliwych par</b>
                 <VerticalLayout className="stage-container">
                     {this.renderVariants(this.props.variants)}
