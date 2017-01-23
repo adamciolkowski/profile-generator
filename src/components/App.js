@@ -64,7 +64,7 @@ export default class App extends Component {
             if (destination_top < original_top) {
                 clearInterval(intervalId);
             }
-        }, 20);
+        }, 1);
     }
 
     stageTwo() {
