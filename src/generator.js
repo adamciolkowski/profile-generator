@@ -20,7 +20,7 @@ export function getAllPermutations(val, nrOfPeople) {
     for(let i = 1; i < val.length; i++) {
         let lastLength = generatedFeatures.length;
         for (let j = 0; j < lastLength; j++) {
-            let featureToJoin = generatedFeatures[j]
+            let featureToJoin = generatedFeatures[j];
             for (let k = 0; k < val[i].length; k++) {
                 let joinedElement = featureToJoin + '.' + val[i][k];
                 if (k == 0)
@@ -32,13 +32,7 @@ export function getAllPermutations(val, nrOfPeople) {
                     break;
                 }
             }
-
-            if (stopGenerating)
-                continue;
         }
-
-        if (stopGenerating)
-            continue;
     }
 
     if (generatedFeatures.length > nrOfPeople)
