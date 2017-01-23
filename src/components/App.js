@@ -33,6 +33,7 @@ export default class App extends Component {
         let isMixtureEntered = !isEmpty(this.state.mixture);
         return (
             <div className="App">
+                <h2>Generowanie profili genetycznych</h2>
                 <div id="comment" className="comment-layer">
                 Wprowadź miksturę oraz liczbę osób ilu profile chcesz uzyskać
                 </div>
