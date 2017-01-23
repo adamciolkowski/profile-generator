@@ -9,7 +9,12 @@ export function allPossibleNElementArrays(elements, n) {
     let indices = times(n, i => 0);
     for(let i = 0; i < Math.pow(elements.length, n); i++) {
         let array = indices.map(i => elements[i]);
-        arrays.push(array);
+        if(elements[i]+","+elements[i] == array)
+        {
+            arrays.push([elements[i]]);
+        }
+        else
+            arrays.push(array);
         let index = n - 1;
         while (index >= 0) {
             if(indices[index] < elements.length - 1) {
