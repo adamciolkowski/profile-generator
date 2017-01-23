@@ -31,3 +31,26 @@ table {
 div.hidden {
     display: none;
 }
+
+div.comment-layer {
+  position: absolute;
+  right: 0px;
+  width: 200px;
+  margin: 4px;
+  background-color: white;
+  border-radius: 4px;
+
+  padding: 5px 10px;
+  font-size: 16px;
+  border-color: #66afe9;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+  transition: box-shadow 0.50s ease-out;
+  transition: background-color 0.90s ease-out;
+  transition: color 1s ease-out;
+
+  &:hover {
+    color: rgba(200, 200, 200, 0.2);
+    background-color: rgba(255, 255, 255, 0.25);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.005), 0 0 8px rgba(102, 175, 233, 0.01);
+  }
+}

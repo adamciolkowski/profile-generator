@@ -21,11 +21,16 @@ export default class App extends Component {
 
         this.onInput = this.onInput.bind(this);
         this.onNrOfPeopleChanged = this.onNrOfPeopleChanged.bind(this);
+        this.stageTwo = this.stageTwo.bind(this);
+        this.stageThree = this.stageThree.bind(this);
     }
 
     render() {
         return (
             <div className="App">
+                <div id="comment" className="comment-layer">
+                Wprowadź miksturę oraz liczbę osób ilu profile chcesz uzyskać
+                </div>
                 {this.renderInputs()}
                 {this.renderParsedMixture()}
                 <input type="button" value="Next stage" className="next-stage-input" onClick={this.stageTwo}/>
@@ -41,12 +46,29 @@ export default class App extends Component {
         );
     }
 
+    moveCommentToDiv(divName) {
+        var original_top = document.getElementById("comment").style.top.replace(/\D/g,'');
+        var destination_top = document.getElementById(divName).offsetTop;
+        var intervalId = setInterval(function() {
+            original_top++;
+            document.getElementById("comment").style.top = original_top + 'px';
+
+            if (destination_top < original_top) {
+                clearInterval(intervalId);
+            }
+        }, 20);
+    }
+
     stageTwo() {
         document.getElementById("secondStage").style.display = 'block';
+        document.getElementById("comment").innerHTML = 'Dla każdej cechy generowane są jej wszystkie możliwe kombinacje';
+        this.moveCommentToDiv("secondStage");
     }
 
     stageThree() {
         document.getElementById("thirdStage").style.display = 'block';
+        document.getElementById("comment").innerHTML = 'Profil powstaje przez złożenie wszystkich możliwych par cech';
+        this.moveCommentToDiv("thirdStage");
     }
 
     renderInputs() {
